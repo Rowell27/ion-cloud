@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar hideBackButton >
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome!</h2>
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{profilepic}}">
+      </ion-avatar>
+      <h2><b>{{fullname}}</b></h2>
+      <p>Email: {{mail}}</p>
+    </ion-item>
+  </ion-card>
+  <button ion-button block color="danger" (click)="logout()" >Log-out</button>
+</ion-content>
+
+  
