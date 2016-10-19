@@ -14,29 +14,69 @@ import { HomePage } from '../home/home';
   templateUrl: 'account.html'
 })
 export class Account {
+  pword: string;
+  e_mail: string;
+  fname: string;
+  lname: string;
+  full_name: string;
 
   authType: string; 
-  // details: UserDetails = {'email': 'hi@ionic.io', 'password': 'puppies123'};
+  
+  
 
   constructor(public navCtrl: NavController, public auth: Auth, public user: User) {
     this.authType = "login";
-    
   }
 
-  // signup(){
+
+  signup(){
+    this.full_name = this.fname + " " + this.lname;
     
-  //   this.auth.signup(this.details).then(() => {
-  //     // `this.user` is now registered
-  //   }, (err: IDetailedError<string[]>) => {
-  //     for (let e of err.details) {
-  //       if (e === 'conflict_email') {
-  //         alert('Email already exists.');
-  //       } else {
-  //         // handle other errors
-  //       }
-  //     }
-  //   });
-  // }
+    let details: UserDetails = {
+      name: this.full_name,
+      email: this.e_mail,
+      password : this.pword
+    };
+    // console.log(this.details.email + this.details.name + this.details.password);
+    this.auth.signup(details).then((sucess) => {
+      
+      this.user.details.name = details.name;
+      this.user.details.email = details.email;
+      this.user.details.password = details.password ;
+
+      alert('Registered successfully!');
+      // return this.auth.login('basic', details);
+      
+    }, (err: IDetailedError<string[]>) => {
+      for (let e of err.details) {
+        if (e === 'conflict_email') {
+          alert('Email already exists.');
+        } else {
+          alert(e);
+        }
+      }
+    });
+  }
+
+  login(){
+    let details: UserDetails = {
+      name: this.full_name,
+      email: this.e_mail,
+      password : this.pword
+    };
+    
+    this.auth.login('basic', details).then((sucess) => {
+      const fullName = this.user.details.name;
+      const email = this.user.details.email;
+      
+      // alert(fullName + " " + email);
+      this.navCtrl.push(HomePage, {
+            fullName, email
+            });
+    }, (error) => {
+      alert(error)
+    });
+  }
 
   loginGoogle(){
     this.auth.login('google').then((success) => {
@@ -83,4 +123,18 @@ export class Account {
         });
   }
 
+  loginTwitter(){
+    this.auth.login('twitter').then((success) => {
+            const fullName = this.user.social.twitter.data.full_name;
+            const email = this.user.social.twitter.data.email;
+            const profilePic = this.user.social.twitter.data.profile_picture;
+            
+            this.navCtrl.push(HomePage, {
+            fullName, email, profilePic
+            });
+            
+        }, (error) => {
+            alert(error);
+        });
+  }
 }

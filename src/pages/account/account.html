@@ -26,18 +26,21 @@
 
   <div [ngSwitch]="authType">
     <form *ngSwitchCase="'login'">
-      <ion-item>
-        <ion-label floating >Email</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
-      
-      <div padding>
-        <button ion-button block round type="submit">Log-in</button>
-      </div>
+      <form (ngSubmit)="login(e_mail,pword)">
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="e_mail" name="e_mail" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="pword" name="pword" ></ion-input>
+        </ion-item>
+        
+        <div padding>
+          <button ion-button block round type="submit">Log-in</button>
+        </div>
+      </form>
+
       <p class="text-content">or Sign-in using</p>
       <div padding class="text-content">
         <button ion-button icon-left color="danger" type="submit" (click)="loginGoogle()">
@@ -48,6 +51,10 @@
           <ion-icon name="logo-facebook" > </ion-icon> 
            Facebook
         </button>
+        <button ion-button icon-left color="calm" type="submit" (click)="loginTwitter()">
+          <ion-icon name="logo-twitter" > </ion-icon> 
+           Twitter
+        </button>
         <button ion-button icon-left color="dark" type="submit" (click)="loginGit()">
           <ion-icon name="logo-github" > </ion-icon> 
            GitHub
@@ -55,19 +62,30 @@
       </div>
     </form>
 
-    <form *ngSwitchCase="'signup'">
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="text" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" ></ion-input>
-      </ion-item>
-      
-      <div padding>
-        <button ion-button block round type="submit">Sign-up</button>
-      </div>
+    <form *ngSwitchCase="'signup'" >
+      <form (ngSubmit)="signup(e_mail, pword)">
+        <ion-item>
+          <ion-label floating>First Name</ion-label>
+          <ion-input type="text" [(ngModel)]="fname" name="fname" ></ion-input>
+        </ion-item>
+         <ion-item>
+          <ion-label floating>Last Name</ion-label>
+          <ion-input type="text" [(ngModel)]="lname" name="lname" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="e_mail" name="e_mail" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="pword" name="pword" ></ion-input>
+        </ion-item>
+        
+        <div padding>
+          <button ion-button block round type="submit">Sign-up</button>
+        </div>
+      </form>
+<!--
       <p class="text-content">or Sign-up using</p>
       <div padding class="text-content">
         <button ion-button icon-left color="danger" type="submit" (click)="signupGoogle()">
@@ -78,12 +96,18 @@
           <ion-icon name="logo-facebook" > </ion-icon> 
            Facebook
         </button>
-        <button ion-button icon-left color="dark" type="submit" (click)="signupGit()">
+        <button ion-button icon-left color="calm" type="submit" (click)="signupTwitter()">
+          <ion-icon name="logo-twitter" > </ion-icon> 
+           Twitter
+        </button>
+        <button ion-button icon-lef block round color="dark" type="submit" (click)="signupGit()">
           <ion-icon name="logo-github" > </ion-icon> 
            GitHub
         </button>
-      </div>
+      </div>-->
     </form>
   </div>
+  
+
 
 </ion-content>

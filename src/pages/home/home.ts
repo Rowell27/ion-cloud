@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-import { Auth, User } from '@ionic/cloud-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Account } from '../account/account';
 
 @Component({
@@ -22,8 +22,9 @@ export class HomePage {
 
   logout(){
     this.auth.logout();
-    alert ("Logout Successful");
+    //Log-out user from app
     this.navCtrl.pop(Account);
+    alert ("Logout Successful");
   }
 
 }
